@@ -33,7 +33,7 @@ const getById = (userId, callback) => {
 }
 
 //get a user by username and password
-const getByUserNamePassword = (data, callback) => {
+const getByUserNamePassword = (session, data, callback) => {
     let sqlQuery = `SELECT * FROM users WHERE email='${data.email}'`
     db.query(sqlQuery, (error, user) => {
         // if(error) throw error
@@ -45,6 +45,7 @@ const getByUserNamePassword = (data, callback) => {
             if(user.length > 0) {
                 bcrypt.compare(data.password, user[0].password, (error, response) => {
                     if(response){
+                        session = user
                         callback(user)
                     }
                     else {

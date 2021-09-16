@@ -6,7 +6,7 @@ exports.login = (req, res) => {
         password: req.body.password
     }
     
-    Users.getByUserNamePassword(currentUser, (user) => {
+    Users.getByUserNamePassword(req.session.currentUser, currentUser, (user) => {
         if(user.length) {
             res.json({
                 data: {
