@@ -40,7 +40,7 @@ exports.register = (req, res) => {
     Users.register(newUser, () => {
         res.json({
             data: {
-                message: 'New User Added..!',
+                message: `New User ${req.body.name}, Added..!`,
                 data: newUser
             }
         })

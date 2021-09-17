@@ -33,19 +33,20 @@ const getById = (userId, callback) => {
 }
 
 //get a user by username and password
-const getByUserNamePassword = (session, data, callback) => {
+const getByUserNamePassword = (data, callback) => {
     let sqlQuery = `SELECT * FROM users WHERE email='${data.email}'`
     db.query(sqlQuery, (error, user) => {
         // if(error) throw error
         // callback(user)
         if(error) {
-            callback(error)
+            console.log(error);
         }
         else {
             if(user.length > 0) {
                 bcrypt.compare(data.password, user[0].password, (error, response) => {
                     if(response){
-                        session = user
+                        // session = user
+                        // console.log(session)
                         callback(user)
                     }
                     else {
@@ -85,7 +86,6 @@ const deleteById = (userId, callback) => {
         callback()
     })
 }
-
 
 module.exports = {
     getAll, getById, getByUserNamePassword, register, updateById, deleteById
