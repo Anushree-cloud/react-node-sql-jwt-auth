@@ -5,6 +5,6 @@ const Tokens = require('../tokens/jwtokens')
 
 authRouter.post('/login', Auth.login)
 
-authRouter.get('/profile', Tokens.validateToken, Auth.profile )
+authRouter.get('/profile', Tokens.validateToken)
 
 module.exports = authRouter

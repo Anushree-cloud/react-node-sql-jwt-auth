@@ -19,8 +19,13 @@ exports.validateToken = (req, res, next) => {
 
     try {
         let validToken = jwt.verify(accessToken, "jwtSecret")
+        console.log(validToken);
+        console.log(accessToken)
         if(validToken){
             req.authenticate = true
+            res.json({
+                token: accessToken
+            })
             return next()
         }
     } catch (error) {
